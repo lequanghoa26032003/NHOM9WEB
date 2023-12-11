@@ -1,0 +1,18 @@
+﻿@model IList<TbBlogComment>
+@using NHOM9WEB.Utilities;
+@foreach(var item in Model) {
+
+    <div class="blog-author">
+        <div class="media align-items-center">
+            <img src="img/blog/author.png" alt="">
+            <div class="media-body">
+                <a href="#">
+                    <h4>@item.Name</h4>
+                </a>
+                <p>
+                    @item.Detail
+                </p>
+            </div>
+        </div>
+    </div>
+}

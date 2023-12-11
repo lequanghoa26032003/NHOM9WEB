@@ -1,0 +1,23 @@
+﻿@model IList<TbProductCategory>
+@using NHOM9WEB.Models;
+@using NHOM9WEB.Utilities;
+
+<div class="col-lg-3">
+    <div class="left_sidebar_area">
+        <aside class="left_widgets p_filter_widgets">
+            <div class="l_w_title">
+                <h3>Browse Categories</h3>
+            </div>
+            <div class="widgets_inner">
+                <ul class="list">
+                    @foreach(var item in Model) {
+
+                        <li>
+                            <a asp-controller="Home" asp-action="SanPhamTheoLoai" asp-route-CategoryProduct="@item.CategoryProductId">@item.Type</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>

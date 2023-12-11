@@ -1,0 +1,114 @@
+﻿@model IPagedList<ShopCategory>
+@using NHOM9WEB.Utilities;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+
+<section class="product_list section_padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="section_tittle text-center">
+                    <h2>awesome <span>shop</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @await Component.InvokeAsync("Category")
+            <div class="col-lg-12">
+                <div class="product_list_slider owl-carousel owl-loaded owl-drag">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage" style="transform: translate3d(-2880px, 0px, 0px); transition: all 1s ease 0s; width: 5760px;">
+                            <div class="owl-item cloned" style="width: 930px; margin-right: 30px;">
+                                <div class="single_product_list_slider">
+                                    <div class="row align-items-center justify-content-between">
+                                        @foreach (var item in Model) {
+                                            <div class="col-lg-3 col-sm-6">
+                                                <div class="single_product_item">
+                                                    <img src="@item." alt="">
+                                                    <div class="single_product_text">
+                                                        <h4>@item.Title</h4>
+                                                        <h3>@item.Expr2</h3>
+                                                        <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="owl-nav"><button type="button" role="presentation" class="owl-prev">next</button><button type="button" role="presentation" class="owl-next">previous</button></div><div class="owl-dots disabled"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="pagination-area pt-10">
+            <nav aria-label="Page navigation example">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), new PagedListRenderOptions()
+                {
+                ActiveLiElementClass = "active",
+                PageClasses = new[]{ "page-link"},
+                LiElementClasses=new[] { "page-item" },
+                UlElementClasses = new[] { "pagination", "justify-content-center"},
+                //LinkToNextPageFormat = "Next",
+                //LinkToPreviousPageFormat = "Previous",
+                //MaximumPageNumbersToDisplay = 5,
+                //DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                //DisplayLinkToNextPage = PagedListDisplayMode.Always
+                })
+                @*<ul class="pagination justify-content-center">
+                <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                <span class="fa fa-chevron-left"></span>
+                </a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                <span class="fa fa-chevron-right"></span>
+                </a>
+                </li>
+                </ul>*@
+            </nav>
+        </div>
+    </div>
+
+</section>
+<section class="product_list best_seller section_padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="section_tittle text-center">
+                    <h2>Best Sellers <span>shop</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-12">
+                <div class="best_product_slider owl-carousel owl-loaded owl-drag">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage" style="transform: translate3d(-1200px, 0px, 0px); transition: all 0.25s ease 0s; width: 3120px;">
+                            @foreach (var item in Model) {
+                                if (item.IsBestSeller==true) {
+                                    <div class="owl-item cloned" style="width: 210px; margin-right: 30px;">
+                                        <div class="single_product_item">
+                                            <img src="@item.Image" alt="">
+                                            <div class="single_product_text">
+                                                <h4>@item.Title</h4>
+                                                <h3>@item.PriceSale</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div><div class="owl-nav"><button type="button" role="presentation" class="owl-prev">next</button><button type="button" role="presentation" class="owl-next">previous</button></div><div class="owl-dots disabled"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
