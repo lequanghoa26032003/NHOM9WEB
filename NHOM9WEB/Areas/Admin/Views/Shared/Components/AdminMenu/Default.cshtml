@@ -20,24 +20,23 @@
             var Pid = item.AdminMenuId;
             var Smenu = Model.Where(p => p.ParentLevel == Pid).OrderBy(p => p.ItemOrder).ToList();
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" data-bs-targot="@item.ItemTarget" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                    <span class="@item.Icon">@item.ItemName</span>
-                    <i class="menu-arrow"></i>
-                    <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                <a class="nav-link" data-bs-targot="@item.ItemTarget" data-bs-toggle="collapse" href="#" aria-expanded="true" aria-controls="ui-basic">
+                    <span>@item.ItemName</span>
+                    <i class="@item.Icon"><i class="mdi mdi-crosshairs-gps menu-icon"></i>
                 </a>
-                <div class="collapse" id="@item.IdName">
-                    <ul  class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                        @foreach(var smn in Smenu) {
-                            <li class="nav-item"> 
-                                <a class="nav-link" href="/Admin/@smn.ControllerName">
-                                    <i class="billing_details bi-circle">
-                                    </i>
+                <div >
+                    <ul id="@item.IdName" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                        @foreach (var smn in Smenu) {
+                            <li>
+                                <a href="/Admin/@smn.ControllerName/@smn.ActionName">
+                                    <i class="billing_details bi-circle"></i>
                                     <span>@smn.ActionName</span>
                                 </a>
-                                </li>
+                            </li>
                         }
                     </ul>
                 </div>
+
             </li>
 
         }

@@ -27,7 +27,6 @@
                 <div class="row align-items-center latest_product_inner">
                     @foreach (var item in Model) {
                         string url = Functions.TitleSlugGeneration("review", item.Title, item.ProductId);
-
                         <div class="col-lg-4 col-sm-6">
                             <div class="single_product_item">
                                 <img src="@item.Image" alt="">
@@ -37,7 +36,7 @@
 
                                     </a>
                                     <h3>@item.Price</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                    <a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-Id="@item.ProductId">+ add to cart </a>
                                 </div>
                             </div>
                         </div>

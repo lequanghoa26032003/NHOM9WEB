@@ -17,7 +17,7 @@
                         <ul class="navbar-nav">
                             @foreach (var menu in Model.Where(m => m.Levels == 1).OrderBy(n => n.MenuOrder)) {
                                 var Pid = menu.MenuId;
-                                string url=Functions.TitleSlugGeneration(""+menu.ControllerName,menu.MenuName,menu.MenuId);
+                                string url=Functions.TitleSlugGeneration(""+menu.ControllerName, menu.MenuName,menu.MenuId);
                                 if (!string.IsNullOrEmpty(menu.Link)) {
                                     url = menu.Link;
                                 }
@@ -38,7 +38,7 @@
                                             @foreach (var smn in Smenu) {
                                                 string url1 = Functions.TitleSlugGeneration(""+menu.ControllerName, menu.MenuName, menu.MenuId);
                                                 if (!string.IsNullOrEmpty(smn.Link)) {
-                                                    url = smn.Link;
+                                                    url1 = smn.Link;
                                                 }
                                                 <a class="dropdown-item" href="/@url1">@smn.MenuName</a>
                                             }

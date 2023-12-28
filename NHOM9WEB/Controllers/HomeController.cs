@@ -58,11 +58,11 @@ namespace NHOM9WEB.Controllers
             return View(list);
         }
 
-        public IActionResult SanPhamTheoLoai(int maloai, int? page)
+        public IActionResult SanPhamTheoLoai(int id, int? page)
         {
             if (page == null) page = 1;
             int pageSize = 8;
-            var list = _context.ShopCategories.Where(m => m.CategoryProductId==maloai).OrderBy(x => x.Title).ToPagedList((int)page, pageSize);
+            var list = _context.ShopCategories.Where(m => m.CategoryProductId==id).ToPagedList((int)page, pageSize);
 
             return View(list);
         }

@@ -11062,11 +11062,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\PTUDWEB\\NHOM9WEB\\NHOM9WEB\\NHOM9WEB.csproj",
+      "projectUniqueName": "C:\\Users\\hoacon\\OneDrive\\Desktop\\NHOM9WEB\\NHOM9WEB\\NHOM9WEB.csproj",
       "projectName": "NHOM9WEB",
-      "projectPath": "C:\\PTUDWEB\\NHOM9WEB\\NHOM9WEB\\NHOM9WEB.csproj",
+      "projectPath": "C:\\Users\\hoacon\\OneDrive\\Desktop\\NHOM9WEB\\NHOM9WEB\\NHOM9WEB.csproj",
       "packagesPath": "C:\\Users\\hoacon\\.nuget\\packages\\",
-      "outputPath": "C:\\PTUDWEB\\NHOM9WEB\\NHOM9WEB\\obj\\",
+      "outputPath": "C:\\Users\\hoacon\\OneDrive\\Desktop\\NHOM9WEB\\NHOM9WEB\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hoacon\\AppData\\Roaming\\NuGet\\NuGet.Config",

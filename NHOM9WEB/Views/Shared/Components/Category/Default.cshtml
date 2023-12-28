@@ -13,7 +13,7 @@
                     @foreach(var item in Model) {
 
                         <li>
-                            <a asp-controller="Home" asp-action="SanPhamTheoLoai" asp-route-CategoryProduct="@item.CategoryProductId">@item.Type</a>
+                            @Html.ActionLink(item.Type,"SanPhamTheoLoai","Home",new{@Id=item.CategoryProductId})
                         </li>
                     }
                 </ul>
