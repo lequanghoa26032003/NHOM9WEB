@@ -10,12 +10,12 @@
             </div>
             <div class="widgets_inner">
                 <ul class="list">
-                    @foreach(var item in Model) {
-
+                    @foreach (var item in Model) {
                         <li>
-                            @Html.ActionLink(item.Type,"SanPhamTheoLoai","Home",new{@Id=item.CategoryProductId})
+                            @Html.ActionLink(item.Type, "SanPhamTheoLoai", "Home", new { @Id = item.CategoryProductId }, new { @class = "category-link", data_category_id = item.CategoryProductId })
                         </li>
                     }
+
                 </ul>
             </div>
         </aside>

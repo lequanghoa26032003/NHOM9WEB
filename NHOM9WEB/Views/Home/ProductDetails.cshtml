@@ -8,7 +8,7 @@
                     <div class="lSSlideOuter  vertical" style="padding-right: 105px;">
                         <div class="lSSlideWrapper usingCss" style="height: 450px;">
                             <div id="vertical" class="lightSlider lsGrab lSSlide" style="height: 1800px; transform: translate3d(0px, 0px, 0px);">
-                                <div data-thumb="@Model.Image" class="lslide active" style="height: 450px; margin-bottom: 0px;">
+                                <div class="lslide active" style="height: 450px; margin-bottom: 0px;">
                                     <img src="@Model.Image">
                                 </div>
                                 </div>
@@ -24,11 +24,10 @@
                     <ul class="list">
                         <li>
                             <a class="active" href="#">
-                                <span>Category</span> : Household
+                              
                             </a>
                         </li>
                         <li>
-                            <a href="#"> <span>Availibility</span> : In Stock</a>
                         </li>
                     </ul>
                     <p>
@@ -40,7 +39,8 @@
                             <input class="input-number" type="text" value="1" min="0" max="10">
                             <span class="number-increment"> <i class="ti-plus"></i></span>
                         </div>
-                        <a href="#" class="btn_3">add to cart</a>
+                        <a class="btn_3" asp-action="Add" asp-controller="Cart" asp-route-Id="@Model.ProductId">+ add to cart </a>
+
                         <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
                     </div>
                 </div>

@@ -501,19 +501,14 @@ namespace NHOM9WEB.Models
 
                 entity.ToView("TbReview");
 
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Detail).HasMaxLength(200);
 
-                entity.Property(e => e.Email).HasMaxLength(50);
 
-                entity.Property(e => e.Image).HasMaxLength(200);
+                entity.Property(e => e.Title).HasMaxLength(200);
 
-                entity.Property(e => e.Name).HasMaxLength(50);
+                entity.Property(e => e.Image).HasMaxLength(500);
 
-                entity.Property(e => e.Phone).HasMaxLength(50);
 
-                entity.Property(e => e.Title).HasMaxLength(250);
             });
 
             modelBuilder.Entity<TbRole>(entity =>

@@ -44,7 +44,71 @@ namespace NHOM9WEB.Controllers
                 cartItems.Quantity +=1;
             }
             HttpContext.Session.SetJson("Cart", cart);
+            TempData["success"]="Thêm thành công";
             return Redirect(Request.Headers["Referer"].ToString());
         }
+        public async Task<IActionResult> Decrease(int Id)
+        {
+            List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart");
+            CartItem cartItems = cart.Where(c => c.ProductId==Id).FirstOrDefault();
+            if (cartItems.Quantity > 1) {
+                --cartItems.Quantity;
+            }
+            else {
+                cart.RemoveAll(c => c.ProductId==Id);
+            }
+            if (cart.Count==0) {
+                HttpContext.Session.Remove("Cart");
+            }
+            else {
+                HttpContext.Session.SetJson("Cart", cart);
+            }
+            TempData["success"]="Giảm số lượng thành công";
+
+            return RedirectToRoute("Index", new { slug = "your-slug", id = 3 });
+
+        }
+        public async Task<IActionResult> Increase(int Id)
+        {
+            List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart");
+            CartItem cartItems = cart.Where(c => c.ProductId==Id).FirstOrDefault();
+            if (cartItems.Quantity>=1) {
+                ++cartItems.Quantity;
+            }
+            else {
+                cart.RemoveAll(c => c.ProductId==Id);
+
+            }
+            if (cart.Count==0) {
+                HttpContext.Session.Remove("Cart");
+            }
+            else {
+                HttpContext.Session.SetJson("Cart", cart);
+
+            }
+            TempData["success"]="Tăng số lượng sản phẩm thành công";
+
+            return RedirectToRoute("Index", new { slug = "your-slug", id = 3 });
+        }
+        public async Task<IActionResult> Remove(int Id, bool? confirmDelete)
+        {
+            if (confirmDelete.HasValue && confirmDelete.Value) {
+                List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart");
+
+
+                var itemToRemove = cart.FirstOrDefault(item => item.ProductId == Id);
+                if (itemToRemove != null) {
+                    cart.Remove(itemToRemove);
+                    HttpContext.Session.SetJson("Cart", cart);
+                }
+                TempData["success"]="Xóa sản phẩm thành công";
+
+                return RedirectToAction("Index", new { slug = "your-slug", id = 3 });
+            }
+            else {
+                return RedirectToAction("Index", new { slug = "your-slug", id = 3 });
+            }
+        }
+
     }
 }

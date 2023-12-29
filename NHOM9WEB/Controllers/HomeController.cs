@@ -50,6 +50,17 @@ namespace NHOM9WEB.Controllers
             }
             return View(list);
         }
+        public IActionResult Searchsp(string keyword, int? page)
+        {
+            if (page == null) page = 1;
+            int pageSize = int.MaxValue;
+            // Assuming you want to search for blog posts based on the keyword
+            var searchResults = _context.TbProducts
+                .Where(m => m.Title.Contains(keyword)).ToPagedList((int)page, pageSize);
+
+            // You can pass the search results to your view
+            return View(searchResults);
+        }
         [Route("/review-{slug}-{id:int}.html", Name = "ProductDetails")]
         public IActionResult ProductDetails(int? id)
         {
@@ -58,14 +69,15 @@ namespace NHOM9WEB.Controllers
             return View(list);
         }
 
-        public IActionResult SanPhamTheoLoai(int id, int? page)
+        public IActionResult SanPhamTheoLoai(int? id, int? page)
         {
             if (page == null) page = 1;
-            int pageSize = 8;
+            int pageSize = 9;
             var list = _context.ShopCategories.Where(m => m.CategoryProductId==id).ToPagedList((int)page, pageSize);
 
             return View(list);
         }
+
         public IActionResult Privacy()
         {
             return View();
@@ -102,12 +114,31 @@ namespace NHOM9WEB.Controllers
             }
             return View(list);
         }
-        [Route("/contact-{slug}-{id:int}.html", Name = "Contact")]
-        public IActionResult Contact(int? id, int? page)
+        [HttpPost]
+        public IActionResult Create(int? id, string name, string phone, string email, string message)
         {
-            return View();
-
+            try {
+                TbBlogComment comment = new TbBlogComment();
+                comment.BlogId = id;
+                comment.Name = name;
+                comment.Phone = phone;
+                comment.Email = email;
+                comment.Detail = message;
+                comment.CreatedDate = DateTime.Now;
+                _context.Add(comment);
+                _context.SaveChangesAsync();
+                return Json(new { status = true });
+            }
+            catch {
+                return Json(new { status = false });
+            }
         }
+        //[Route("/contact-{slug}-{id:int}.html", Name = "Contact")]
+        //public IActionResult Contact(int? id, int? page)
+        //{
+        //    return View();
+
+        //}
         public IActionResult Search(string keyword, int? page)
         {
             if (page == null) page = 1;

@@ -122,6 +122,7 @@
     </section>
     <!-- banner part start-->
     @await Component.InvokeAsync("MenuView")
+    @Html.Partial("_NotificationPartial")
     @RenderBody()
     <!--::footer_part start::-->
     <footer class="footer_part">
@@ -222,6 +223,7 @@
             </div>
         </div>
     </footer>
+    @await RenderSectionAsync("Scripts", required: false)
     <!--::footer_part end::-->
     <!-- jquery plugins here-->
     <script src="~/js/jquery-1.12.1.min.js"></script>

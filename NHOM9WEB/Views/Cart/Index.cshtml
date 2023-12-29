@@ -32,9 +32,21 @@
                                         <h5>@item.Price</h5>
                                     </td>
                                     <td>
-                                            <span class="input-number-decrement"> <i class="btn btn-default btn-sm" asp-controller="Cart" asp-action="Increase" asp-route-Id="@item.ProductId">-</i></span>
-                                            <input class="input-number" type="text" value="@item.Quantity" min="0" max="10">
-                                            <span class="input-number-decrement"> <i class="btn btn-success btn-sm" asp-controller="Cart" asp-action="Decrease" asp-route-Id="@item.ProductId">+</i></span>
+
+                                        <!-- Include this div for displaying the alert -->
+                                        <div id="custom-alert" class="alert notification">
+                                            <span id="custom-alert-message"></span>
+                                        </div>
+
+                                        <!-- Your HTML for cart actions -->
+                                        <a class="btn btn-default btn-sm decrease-btn" asp-controller="Cart" asp-action="Decrease" asp-route-Id="@item.ProductId">-</a>
+                                        <input class="input-number" type="text" name="quantity" value="@item.Quantity" min="0" max="10">
+                                        <a class="btn btn-success btn-sm increase-btn" asp-controller="Cart" asp-action="Increase" asp-route-Id="@item.ProductId">+</a>
+                                        <a class="btn btn-success btn-sm remove-btn"
+                                           asp-controller="Cart"
+                                           asp-action="Remove"
+                                           asp-route-Id="@item.ProductId"
+                                           onclick="return confirmDelete('@item.ProductId')">Xóa</a>
                                     <td>
                                         <h5>@Model.CartItems.Where(x=>x.ProductId==item.ProductId).Sum(x=>x.Quantity*x.Price).ToString()</h5>
                                     </td>
@@ -44,40 +56,22 @@
                         else {
                            <tr>
                                <td solspan="5">
-                                    <h4>Your Cart is Empty</h4>
+                                    <h4>Giỏ hàng đang trống</h4>
 
                                </td>
                            </tr>
                         }
-                        <tr class="bottom_button">
-                            <td>
-                                <a class="btn_1" href="#">Update Cart</a>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <div class="cupon_text float-right">
-                                    <a class="btn_1" href="#">Close Coupon</a>
-                                </div>
-                            </td>
-                        </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td>
-                                <h5>Subtotal</h5>
+                                <h5 style="color: #333; font-size: 1.2em;">Tổng tiền</h5>
                             </td>
                             <td>
-                                <h5> @Model.GrandTotal.ToString()</h5>
+                                <h5 style="color: #e44d26; font-size: 1.5em; font-weight: bold;">@Model.GrandTotal.ToString()</h5>
                             </td>
                         </tr>
-                        <tr class="shipping_area">
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <h5>Shipping</h5>
-                            </td>
-                        </tr>
+
                     </tbody>
                 </table>
                 <div class="checkout_btn_inner float-right">
@@ -88,3 +82,18 @@
         </div>
     </div>
 </section>
+@section Scripts{
+    <script>
+        function confirmDelete(productId) {
+            var result = confirm("Bạn có chắc chắn muốn xóa sản phẩm này?");
+
+            if (result) {
+                window.location.href = '/Cart/Remove/' + productId + '?confirmDelete=true';
+            } else {
+                window.location.href = '/Cart/Remove/' + productId + '?confirmDelete=false';
+            }
+
+            return false;
+        }
+    </script>
+}

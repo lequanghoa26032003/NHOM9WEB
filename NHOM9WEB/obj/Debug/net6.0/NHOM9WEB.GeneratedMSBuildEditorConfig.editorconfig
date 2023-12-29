@@ -36,8 +36,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Views/Home/Contact.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb250YWN0LmNzaHRtbA==
+[C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Views/Contact/Contact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxDb250YWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Views/Home/Details.cshtml]
@@ -76,12 +76,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWFyY2guY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Views/Shared/Components/Category/Default.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ2F0ZWdvcnlcRGVmYXVsdC5jc2h0bWw=
+[C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Views/Home/Searchsp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWFyY2hzcC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Views/Shared/Components/Comment/Default.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ29tbWVudFxEZWZhdWx0LmNzaHRtbA==
+[C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Views/Shared/Components/Category/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ2F0ZWdvcnlcRGVmYXVsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Views/Shared/Components/MenuView/Default.cshtml]
@@ -98,6 +98,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Views/Shared/_NotificationPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob3RpZmljYXRpb25QYXJ0aWFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Views/Shared/_ValidationScriptsPartial.cshtml]
