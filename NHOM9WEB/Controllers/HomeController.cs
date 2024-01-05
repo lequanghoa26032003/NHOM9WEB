@@ -91,7 +91,7 @@ namespace NHOM9WEB.Controllers
                 return NotFound();
             }
             var post = _context.TbBlogs.FirstOrDefault(m => (m.BlogId==id)&&(m.IsActive==true));
-            ViewBag.blogComment = _context.TbBlogComments.ToList();
+            ViewBag.blogComment = _context.TbBlogComments.Where(i => i.BlogId == id).ToList();
             if (post==null) {
                 return NotFound();
 
@@ -109,6 +109,7 @@ namespace NHOM9WEB.Controllers
             }
             var list = _context.TbviewBlogs
                 .Where(m => (m.MenuId==id)&&(m.IsActive==true)).ToPagedList((int)page, pageSize);
+            ViewBag.blogComment = _context.TbBlogComments.ToList();
             if (list==null) {
                 return NotFound();
             }

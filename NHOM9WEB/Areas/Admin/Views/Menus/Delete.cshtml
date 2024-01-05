@@ -1,0 +1,82 @@
+﻿@model NHOM9WEB.Models.TbMenu
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="card-body">
+        <h1>Xóa danh mục</h1>
+
+        <hr />
+        <dl class="row">
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">Name</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.MenuName)
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">Active</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.IsActive)
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">Controller Name</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.ControllerName)
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">Action Name</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.ActionName)
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">Levels</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.Levels)
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">Parent Id</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.ParentId)
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">Link</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.Link)
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">Menu Order</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.MenuOrder)
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">Position</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.Position)
+                </div>
+            </div>
+        </dl>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="MenuId" />
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger">
+                    <i class="mdi mdi-cup-off"></i> Xóa
+                </button>
+                <a asp-action="Index" class="btn btn-gradient-primary btn-fw"> <i class="mdi mdi-arrow-left-bold-circle-outline"></i>Trở về</a>
+
+            </div>
+        </form>
+    </div>
+
+
+</div>

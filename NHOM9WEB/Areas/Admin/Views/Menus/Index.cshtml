@@ -1,0 +1,59 @@
+﻿
+
+@model IEnumerable<NHOM9WEB.Models.TbMenu>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div >
+    <div>
+        <a asp-action="Create">
+            <button type="button" class="btn btn-outline-success">
+                Thêm mới
+            </button>
+        </a>
+    </div>
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div  style="background-color: #E2E3E5;" class="card-body">
+                <h4 class="card-title">Danh sách danh mục</h4>
+
+                <table class="table table-secondary">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên danh mục</th>
+                            <th>Ẩn/hiện</th>
+                            <th>Liên kết</th>
+                            <th>Mức</th>
+                            <th>Menu cha</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var i = 1;
+                        }
+                        @foreach (var item in Model) {
+                            <tr class="table-secondary " id="tr_@item.MenuId">
+                                <td>@(i++)</td>
+                                <td>@item.MenuName</td>
+                                <td>@item.IsActive</td>
+                                <td>@item.ControllerName</td>
+                                <td>@item.Levels</td>
+                                <td>@item.ParentId</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.MenuId" class="btn btn-gradient-success btn-sm">Sửa</a> |
+                                    <a asp-action="Details" asp-route-id="@item.MenuId" class="btn btn-gradient-dark btn-sm">Chi tiết</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.MenuId" class="btn btn-gradient-danger btn-sm">Xóa</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
