@@ -36,7 +36,7 @@
                                         <h4>@item.Title</h4>
 
                                     </a>
-                                    <h3>@item.Expr2</h3>
+                                    <h3>@Functions.ToVnd((double)item.Expr2)</h3>
                                     <a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-id="@item.CategoryProductId">+ add to cart </a>
                                 </div>
                             </div>

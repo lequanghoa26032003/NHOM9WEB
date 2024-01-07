@@ -1,0 +1,69 @@
+﻿@model NHOM9WEB.Models.TbProduct
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="card-body">
+        <h1>Xóa sản phẩm</h1>
+
+        <hr />
+
+        <dl class="row">
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">@Html.DisplayNameFor(model => model.Title)</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.Title)
+                </div>
+            </div>
+
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">@Html.DisplayNameFor(model => model.Alias)</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.Alias)
+                </div>
+            </div>
+
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">@Html.DisplayNameFor(model => model.Description)</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.Description)
+                </div>
+            </div>
+
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">@Html.DisplayNameFor(model => model.Price)</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.Price)
+                </div>
+            </div>
+
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">@Html.DisplayNameFor(model => model.PriceSale)</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.PriceSale)
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="col-sm-4 col-form-label">@Html.DisplayNameFor(model => model.CategoryProduct)</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.CategoryProduct.CategoryProductId)
+                </div>
+            </div>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="ProductId" />
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger">
+                    <i class="mdi mdi-cup-off"></i> Xóa
+                </button>
+                <a asp-action="Index" class="btn btn-gradient-primary btn-fw">
+                    <i class="mdi mdi-arrow-left-bold-circle-outline"></i> Trở về
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

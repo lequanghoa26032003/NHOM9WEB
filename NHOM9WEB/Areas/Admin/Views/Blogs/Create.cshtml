@@ -5,11 +5,11 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
 
-<h4>TbBlog</h4>
-<hr />
-<div class="row">
+<div class="card-body">
+    <h1>Thêm mới bài viết</h1>
+
+    <hr />
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+                <select asp-for="CategoryId" class ="form-control"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
@@ -33,10 +33,12 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Detail" class="control-label"></label>
-                <input asp-for="Detail" class="form-control" />
+
+                <label asp-for="Detail" class="control-label">Detail</label>
+                <textarea asp-for="Detail" class="form-control" rows="7" placeholder="Enter Detail"></textarea>
                 <span asp-validation-for="Detail" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
                 <input asp-for="Image" class="form-control" />
@@ -87,14 +89,13 @@
                 <span asp-validation-for="MenuId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="submit" class="btn btn-gradient-primary btn-icon-text">
+                    <i class="mdi mdi-file-check btn-icon-prepend"></i> Lưu
+                </button>
+                <a asp-action="Index" class="btn btn-gradient-primary btn-fw"> <i class="mdi mdi-arrow-left-bold-circle-outline"></i>Trở về</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

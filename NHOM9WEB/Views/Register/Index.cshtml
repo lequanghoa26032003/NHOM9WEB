@@ -1,0 +1,52 @@
+﻿@model NHOM9WEB.Models.TbAccount
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin:0 50px;" class="login_part_form">
+    <div class="login_part_form_iner">
+        <h3>Chào mừng! <br>Xin mời đăng ký</h3>
+        <hr />
+
+        <form asp-action="Register" class="row contact_form" method="post" novalidate="novalidate">
+            <div asp-validation-summary="ModelOnly" class="text-danger col-md-8"></div>
+            <div class="col-md-8 form-group p_star">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" placeholder="Username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="col-md-8 form-group p_star">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="col-md-8 form-group p_star">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" placeholder="Phone" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="col-md-8 form-group p_star">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" placeholder="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="col-md-8 form-group">
+                <button type="submit" class="genric-btn success-border circle" formaction="/Register">Tạo tài khoản</button>
+                <button class="genric-btn info-border circle">
+                    <a href="@Url.RouteUrl("Login", new { slug = "dang-nhap", id = 8 })">Back to Login</a>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

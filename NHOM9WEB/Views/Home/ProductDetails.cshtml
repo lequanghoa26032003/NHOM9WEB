@@ -1,4 +1,5 @@
 ﻿@using NHOM9WEB.Models;
+@using NHOM9WEB.Utilities;
 @model NHOM9WEB.Models.TbReview;
 <div class="product_image_area section_padding">
     <div class="container">
@@ -20,7 +21,7 @@
                 <div class="s_product_text">
                     <h5>previous <span>|</span> next</h5>
                     <h3>@Model.Title</h3>
-                    <h2>@Model.Price</h2>
+                    <h2>@Functions.ToVnd((double)Model.Price)</h2>
                     <ul class="list">
                         <li>
                             <a class="active" href="#">

@@ -1,0 +1,128 @@
+﻿@model NHOM9WEB.Models.TbProduct
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card-body">
+    <h1>Thêm mới mặt hàng</h1>
+    <hr />
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Product Title</label>
+                <input asp-for="Title" class="form-control" placeholder="Enter Product Title" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Alias" class="control-label">Alias</label>
+                <input asp-for="Alias" class="form-control" placeholder="Enter Alias" />
+                <span asp-validation-for="Alias" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryProductId" class="control-label">Category</label>
+                <select asp-for="CategoryProductId" class="form-control" asp-items="ViewBag.CategoryProductId">
+                    <option value="">Select Category</option>
+                </select>
+                <span asp-validation-for="CategoryProductId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Description</label>
+                <textarea asp-for="Description" class="form-control" placeholder="Enter Description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Detail" class="control-label">Detail</label>
+                <textarea asp-for="Detail" class="form-control" placeholder="Enter Detail"></textarea>
+                <span asp-validation-for="Detail" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Image" class="control-label">Image URL</label>
+                <input asp-for="Image" class="form-control" placeholder="Enter Image URL" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Price</label>
+                <input asp-for="Price" class="form-control" placeholder="Enter Price" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PriceSale" class="control-label">Sale Price</label>
+                <input asp-for="PriceSale" class="form-control" placeholder="Enter Sale Price" />
+                <span asp-validation-for="PriceSale" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label">Quantity</label>
+                <input asp-for="Quantity" class="form-control" placeholder="Enter Quantity" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label">Created Date</label>
+                <input asp-for="CreatedDate" class="form-control" placeholder="Enter Created Date" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CreatedBy" class="control-label">Created By</label>
+                <input asp-for="CreatedBy" class="form-control" placeholder="Enter Created By" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ModifiedDate" class="control-label">Modified Date</label>
+                <input asp-for="ModifiedDate" class="form-control" placeholder="Enter Modified Date" />
+                <span asp-validation-for="ModifiedDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ModifiedBy" class="control-label">Modified By</label>
+                <input asp-for="ModifiedBy" class="form-control" placeholder="Enter Modified By" />
+                <span asp-validation-for="ModifiedBy" class="text-danger"></span>
+            </div>
+
+            <div class="form-check" style="margin:0 30px;">
+                <input class="form-check-input" asp-for="IsNew" />
+                <label class="form-check-label" asp-for="IsNew">Is New</label>
+            </div>
+
+            <div class="form-check" style="margin:0 30px;">
+                <input class="form-check-input" asp-for="IsBestSeller" />
+                <label class="form-check-label" asp-for="IsBestSeller">Is Best Seller</label>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="UnitInStock" class="control-label">Units In Stock</label>
+                <input asp-for="UnitInStock" class="form-control" placeholder="Enter Units In Stock" />
+                <span asp-validation-for="UnitInStock" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" value="Save" class="btn btn-gradient-primary btn-icon-text">
+                    <i class="mdi mdi-file-check btn-icon-prepend"></i> Lưu
+                </button>
+                <a asp-action="Index" class="btn btn-gradient-primary btn-fw"> <i class="mdi mdi-arrow-left-bold-circle-outline"></i>Trở về</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}

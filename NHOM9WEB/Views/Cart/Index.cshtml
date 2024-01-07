@@ -1,4 +1,6 @@
-﻿@using NHOM9WEB.Models.ViewModel
+﻿@using NHOM9WEB.Models.ViewModel;
+@using NHOM9WEB.Utilities;
+
 @model CartItemViewModel
 <section class="cart_area padding_top">
     <div class="container">
@@ -29,7 +31,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <h5>@item.Price</h5>
+                                        <h5>@Functions.ToVnd((double)item.Price)</h5>
                                     </td>
                                     <td>
 
@@ -68,7 +70,7 @@
                                 <h5 style="color: #333; font-size: 1.2em;">Tổng tiền</h5>
                             </td>
                             <td>
-                                <h5 style="color: #e44d26; font-size: 1.5em; font-weight: bold;">@Model.GrandTotal.ToString()</h5>
+                                <h5 style="color: #e44d26; font-size: 1.5em; font-weight: bold;">@Functions.ToVnd((double)Model.GrandTotal)</h5>
                             </td>
                         </tr>
 

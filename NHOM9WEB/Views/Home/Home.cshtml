@@ -75,8 +75,8 @@
                                                         <a href="/@url">
                                                             <h4>@item.Title</h4>
 
-                                                        </a>                 
-                                                        <h3>@item.Price</h3>
+                                                        </a>
+                                                        <h3>@Functions.ToVnd((double)item.Price)</h3>
                                                         <a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-id="@item.ProductId">+ add to cart </a>
                                                     </div>
                                                 </div>

@@ -17,9 +17,11 @@ namespace NHOM9WEB.Controllers
         }
         public IActionResult Index(int? page)
         {
+
             if (page == null) page = 1;
             int pageSize = 8;
             var list = _context.TbProducts.ToPagedList((int)page, pageSize);
+
             return View(list);
         }
         [Route("/index-{slug}-{id:int}.html", Name = "Home")]
