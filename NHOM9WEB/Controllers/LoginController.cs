@@ -27,12 +27,12 @@ namespace NHOM9WEB.Controllers
             var check = _context.TbAccounts.Where(m => m.Username == account.Username && m.Password == password).FirstOrDefault();
             if (check == null) {
                 Functions._Message = "Invalid Username or Password";
-                return RedirectToRoute("Index", new { slug = "your-slug", id = 8 });
+                return Redirect("login-dang-nhap-8.html");
             }
             Functions._Message = string.Empty;
             Functions._AccountId = check.AccountId;
             Functions._Username = check.Username;
-            return RedirectToAction("Index", "Home");
+            return Redirect("index-trang-chu-1.html");
         }
     }
 }

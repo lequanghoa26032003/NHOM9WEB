@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NHOM9WEB.Models;
+using NHOM9WEB.Utilities;
 using System.Diagnostics;
 using X.PagedList;
 
@@ -23,6 +24,13 @@ namespace NHOM9WEB.Controllers
             var list = _context.TbProducts.ToPagedList((int)page, pageSize);
 
             return View(list);
+        }
+        public IActionResult Logout()
+        {
+            Functions._AccountId = 0;
+            Functions._Username = string.Empty;
+            Functions._Message = string.Empty;
+            return RedirectToRoute("Index", new { slug = "your-slug", id = 8 });
         }
         [Route("/index-{slug}-{id:int}.html", Name = "Home")]
         public IActionResult Home(int? id, int? page)

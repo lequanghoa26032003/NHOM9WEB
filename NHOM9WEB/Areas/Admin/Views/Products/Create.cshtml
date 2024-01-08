@@ -121,7 +121,10 @@
     </div>
 </div>
 
-
+@{
+    var summerNote = new NHOM9WEB.Areas.Admin.Models.SummerNote("#Detail");
+    <partial name="_SummerNote" model="summerNote" />
+}
 
 @section Scripts {
     await Html.RenderPartialAsync("_ValidationScriptsPartial");

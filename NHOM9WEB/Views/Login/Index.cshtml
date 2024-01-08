@@ -21,7 +21,7 @@
                            Chào mừng trở lại ! <br>
                            Vui lòng đăng nhập ngay bây giờ
                         </h3>
-                        <form asp-action="Login" class="row contact_form" method="post" novalidate="novalidate">
+                        <form asp-controller="Login" asp-action="Index" class="row contact_form" method="post" novalidate="novalidate">
                             <div asp-validation-summary="ModelOnly" class="text-danger col-md-8"></div>
                             <div class="col-md-8 form-group p_star">
                                 <label asp-for="Username" class="control-label"></label>
@@ -37,7 +37,7 @@
                                 <input type="checkbox" id="f-option" name="selector">
                                 <label for="f-option">Remember me</label>
                             </div>
-                            <button type="submit" value="submit" class="btn_3" formaction="/Login">
+                            <button type="submit" value="submit" class="btn_3" asp-action="Index">
                                 Đăng nhập
                             </button>
                             <a class="lost_pass" href="#">quên mật khẩu?</a>

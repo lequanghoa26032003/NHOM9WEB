@@ -1,9 +1,9 @@
-﻿@using NHOM9WEB.Models.ViewModel;
-@using NHOM9WEB.Utilities;
-
+﻿@using NHOM9WEB.Utilities;
+@using NHOM9WEB.Models.ViewModel;
 @model CartItemViewModel
 <section class="cart_area padding_top">
     <div class="container">
+        @if (Model.CartItems.Count() > 0) {
         <div class="cart_inner">
             <div class="table-responsive">
                 <table class="table">
@@ -16,8 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.CartItems.Count() > 0)
-                        {
+ 
                             @foreach(var item in Model.CartItems) {
                                 <tr>
                                     <td>
@@ -50,19 +49,10 @@
                                            asp-route-Id="@item.ProductId"
                                            onclick="return confirmDelete('@item.ProductId')">Xóa</a>
                                     <td>
-                                        <h5>@Model.CartItems.Where(x=>x.ProductId==item.ProductId).Sum(x=>x.Quantity*x.Price).ToString()</h5>
+                                        <h5>@Functions.ToVnd((double)Model.CartItems.Where(x=>x.ProductId==item.ProductId).Sum(x=>x.Quantity*x.Price))</h5>
                                     </td>
                                 </tr>
-                            }
-                        }
-                        else {
-                           <tr>
-                               <td solspan="5">
-                                    <h4>Giỏ hàng đang trống</h4>
-
-                               </td>
-                           </tr>
-                        }
+                                }
                         <tr>
                             <td></td>
                             <td></td>
@@ -77,11 +67,15 @@
                     </tbody>
                 </table>
                 <div class="checkout_btn_inner float-right">
-                    <a class="btn_1" href="#">Continue Shopping</a>
-                    <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+                    <a class="btn_1" href="#">Tiếp tục mua hàng</a>
+                    <a id="btnCheckout" class="btn_1 checkout_btn_1" asp-controller="Cart" asp-action="Checkout">Mua hàng</a>
                 </div>
             </div>
         </div>
+        }
+        else {
+            <p class="alert alert-danger">Giỏ hàng trống</p>
+        }
     </div>
 </section>
 @section Scripts{
@@ -98,4 +92,5 @@
             return false;
         }
     </script>
+
 }

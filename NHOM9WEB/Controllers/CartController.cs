@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using NHOM9WEB.Models;
 using NHOM9WEB.Models.ViewModel;
 using NHOM9WEB.Repository;
+using NHOM9WEB.Utilities;
 
 namespace NHOM9WEB.Controllers
 {
@@ -109,6 +112,109 @@ namespace NHOM9WEB.Controllers
                 return RedirectToAction("Index", new { slug = "your-slug", id = 3 });
             }
         }
+        [Route("/checkout")]
+        public IActionResult CheckOut()
+        {
+            if (Functions._AccountId==null ||Functions._AccountId==0) {
+                return Redirect("login-dang-nhap-8.html");
 
+            }
+            else {
+                List<CartItem> cartItems = HttpContext.Session.GetJson<List<CartItem>>("Cart")??new List<CartItem>();
+                CartItemViewModel cartVM = new()
+                {
+                    CartItems=cartItems,
+                    GrandTotal=cartItems.Sum(x => x.Quantity*x.Price)
+                };
+                return View(cartVM);
+
+            }
+
+        }
+        [HttpPost]
+        public IActionResult Create(int? id, string name, string phone, string email, string message)
+        {
+            try {
+                TbProductReview comment = new TbProductReview();
+                comment.ProductId = id;
+                comment.Name = name;
+                comment.Phone = phone;
+                comment.Email = email;
+                comment.Detail = message;
+                comment.CreatedDate = DateTime.Now;
+                comment.IsActive = true;
+                _context.Add(comment);
+                _context.SaveChangesAsync();
+                return Json(new { status = true });
+            }
+            catch {
+                return Json(new { status = false });
+            }
+        }
+        public bool Order(string name, string phone, string address)
+        {
+            // Xử lý khi đặt hàng thành công
+            try {
+                var cart = GetCartItems();
+                if (cart.IsNullOrEmpty()) {
+                    return false;
+                }
+                else {
+                    int totalAmount = 0;
+
+                    var order = new TbOrder();
+                    order.CustomerName = name;
+                    order.Phone = phone;
+                    order.Address = address;
+                    order.TotalAmount = totalAmount;
+                    order.OrderStatusId = 1;
+                    order.CreatedDate = DateTime.Now;
+                    _context.TbOrders.Add(order);
+                    _context.SaveChanges();
+                    int orderId = order.OrderId;
+                    foreach (var item in cart) {
+                        var orderDetail = new TbOrderDetail();
+                        orderDetail.OrderId = orderId;
+                        orderDetail.ProductId=item.product.ProductId;
+                        orderDetail.Price = item.product.Price;
+                        orderDetail.Quantity = item.Quantity;
+                        _context.TbOrderDetails.Add(orderDetail);
+                        _context.SaveChanges();
+                    }
+
+                }
+                ClearCart();
+                return true;
+            }
+            catch {
+                return false;
+            }
+        }
+
+        public const string CARTKEY = "cart";
+
+        List<CartItem> GetCartItems()
+        {
+            List<CartItem> cartItems = HttpContext.Session.GetJson<List<CartItem>>("Cart")??new List<CartItem>();
+            CartItemViewModel cartVM = new()
+            {
+                CartItems=cartItems,
+                GrandTotal=cartItems.Sum(x => x.Quantity*x.Price)
+            };
+            return cartItems;
+        }
+        void ClearCart()
+        {
+            var session = HttpContext.Session;
+            session.Remove(CARTKEY);
+        }
+
+        // Lưu Cart (Danh sách CartItem) vào session
+        void SaveCartSession(List<CartItem> ls)
+        {
+            var session = HttpContext.Session;
+            string jsoncart = JsonConvert.SerializeObject(ls);
+            session.SetString(CARTKEY, jsoncart);
+        }
     }
 }

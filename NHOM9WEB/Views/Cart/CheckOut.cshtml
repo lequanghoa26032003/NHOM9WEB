@@ -1,0 +1,128 @@
+﻿@using NHOM9WEB.Utilities;
+@model NHOM9WEB.Models.ViewModel.CartItemViewModel
+
+
+<section class="checkout_area padding_top">
+    <div class="container">
+        @if (Model.CartItems.Count()>0) {
+            <div class="billing_details">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+
+                            <h3>Chi tiết thanh toán</h3>
+                        <div class="row">
+                                <div class="col-md-6 form-group p_star ">
+                                <div class="form-control">
+                                    <label>Name <span class="required">*</span></label>
+                                    <input placeholder="Name" type="text" id="c_name">
+                                </div>
+                            </div>
+                            @* <div class="col-md-6">
+                        <div class="checkout-form-list">
+                        <label>Last Name <span class="required">*</span></label>
+                        <input placeholder="" type="text">
+                        </div>
+                        </div> *@
+                                <div class="col-md-6 form-group p_star">
+                                <div class="form-control">
+                                    <label>Phone <span class="required">*</span></label>
+                                    <input placeholder="Phone" type="text" id="c_phone">
+                                </div>
+                            </div>
+                                <div class="col-md-6 form-group p_star">
+                                <div class="form-control">
+                                    <label>Address <span class="required">*</span></label>
+                                    <input placeholder="Street address" type="text" id="c_address">
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="order_box">
+                            <h2>
+                                Đơn hàng của bạn
+                            </h2>
+                            <ul class="list">
+
+                                @foreach (var item in Model.CartItems) {
+                                    <li>
+                                        <a href="#">
+                                            @item.ProductName
+                                            <span class="middle">x @item.Quantity</span>
+                                            <span class="last">@Functions.ToVnd((double)Model.CartItems.Where(x=>x.ProductId==item.ProductId).Sum(x=>x.Quantity*x.Price))</span>
+                                        </a>
+                                    </li>
+         
+
+                            }
+                            </ul>
+
+                            <ul class="list list_2">
+                                <li>
+                                    <a href="#">
+                                        Tổng tiền
+                                        <span>@Functions.ToVnd((double)Model.GrandTotal)</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <div class="order-button-payment">
+                                <input class="btn_3" value="Thanh toán" type="submit" id="c_submit">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else {
+            <p class="alert alert-danger">Giỏ hàng trống</p>
+        }
+    </div>
+
+</section>
+  
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/additional-methods.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#c_submit").click(function () {
+                _name = $("#c_name").val();
+                _phone = $("#c_phone").val();
+                _address = $("#c_address").val();
+                $.ajax({
+                    url: "/Cart/Order",
+                    type: "post",
+                    data: { name: _name, phone: _phone, address: _address },
+                    success: function (result) {
+                        if (result) {
+                            $("#c_submit").hide();
+                            toastr.success('Đặt hàng thành công');
+                        }
+                        else {
+                            toastr.success('Đặt hàng không thành công');
+                        }
+                    }
+                })
+            });
+
+            // $("#validate").validate({
+            //     rules: {
+            //         c_name: 'required',
+            //         c_phone: 'required',
+            //         c_address: 'required'
+            //     },
+            //     messages: {
+            //         c_name: 'Username is required',
+            //         c_phone: 'Phone is required',
+            //         c_address: 'Address is required'
+            //     },
+            // });
+        })
+    </script>
+}

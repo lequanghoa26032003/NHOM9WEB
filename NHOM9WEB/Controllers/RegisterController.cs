@@ -32,7 +32,7 @@ namespace NHOM9WEB.Controllers
             account.Password = HashMD5.GetHash(account.Password != null ? account.Password : "");
             _context.Add(account);
             _context.SaveChanges();
-            return RedirectToRoute("Index", new { slug = "your-slug", id = 8 });
+            return Redirect("login-dang-nhap-8.html");
         }
     }
 }

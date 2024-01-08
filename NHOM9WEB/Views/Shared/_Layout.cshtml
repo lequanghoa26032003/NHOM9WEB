@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿@using NHOM9WEB.Utilities;
+
+<!doctype html>
 <html lang="zxx">
 
 <head>
@@ -97,32 +99,103 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="single_banner_slider">
-                            <div class="row">
-                                <div class="col-lg-5 col-md-8">
-                                    <div class="banner_text">
-                                        <div class="banner_text_iner">
-                                            <h1>Cloth $ Wood Sofa</h1>
-                                            <p>Incididunt ut labore et dolore magna aliqua quis ipsum
-                                                suspendisse ultrices gravida. Risus commodo viverra</p>
-                                            <a href="#" class="btn_2">buy now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="banner_img d-none d-lg-block">
-                                    <img src="~/img/banner_img.png" alt="">
-                                </div>
-                            </div>
-                        </div> -->
+
                     </div>
                     <div class="slider-counter"></div>
                 </div>
             </div>
+
         </div>
     </section>
     <!-- banner part start-->
-    @await Component.InvokeAsync("MenuView")
+    <header class="main_menu home_menu">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="index.html"> <img src="~/img/logo.png" alt="logo"> </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                        </button>
+                        @await Component.InvokeAsync("MenuView")
+
+                        <div class="hearer_icon d-flex">
+                            <li class="nav-item dropdown pe-3">
+                                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                                    <img style="width:32px;height:32px;" src="~/img/comment/comment_1.png" alt="Hồ sơ" class="rounded-circle">
+                                    <span class="d-none d-md-block dropdown-toggle ps-2">@Functions._Username</span>
+                                </a><!-- End Profile Iamge Icon -->
+
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                                    <li class="dropdown-header">
+                                        <h6>@Functions._Username</h6>
+                                        <span>@Functions._Email</span>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                            <i class="bi bi-person"></i>
+                                            <span>Hồ sơ của tôi</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                            <i class="bi bi-gear"></i>
+                                            <span>Cài đặt</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                                            <i class="bi bi-question-circle"></i>
+                                            <span>Giúp đỡ?</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center" href="/Home/Logout">
+                                            <i class="bi bi-box-arrow-right"></i>
+                                            <span>Đăng xuất</span>
+                                        </a>
+                                    </li>
+
+                                </ul><!-- End Profile Dropdown Items -->
+                            </li><!-- End Profile Nav -->
+                        </div>
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="search_input" id="search_input_box">
+            <div class="container ">
+                <form class="d-flex justify-content-between search-inner">
+                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <button type="submit" class="btn"></button>
+                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                </form>
+            </div>
+        </div>
+    </header>
+
+
     @Html.Partial("_NotificationPartial")
+
     @RenderBody()
     <!--::footer_part start::-->
     <footer class="footer_part">

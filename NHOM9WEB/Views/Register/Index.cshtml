@@ -1,4 +1,6 @@
-﻿@model NHOM9WEB.Models.TbAccount
+﻿﻿
+
+@model NHOM9WEB.Models.TbAccount
 
 @{
     ViewData["Title"] = "Index";
@@ -33,7 +35,7 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="col-md-8 form-group">
-                <button type="submit" class="genric-btn success-border circle" formaction="/Register">Tạo tài khoản</button>
+                <button type="submit" class="genric-btn success-border circle" asp-action="Create">Tạo tài khoản</button>
                 <button class="genric-btn info-border circle">
                     <a href="@Url.RouteUrl("Login", new { slug = "dang-nhap", id = 8 })">Back to Login</a>
                 </button>
