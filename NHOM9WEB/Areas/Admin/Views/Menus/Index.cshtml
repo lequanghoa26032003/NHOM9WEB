@@ -39,14 +39,22 @@
                             <tr class="table-secondary " id="tr_@item.MenuId">
                                 <td>@(i++)</td>
                                 <td>@item.MenuName</td>
-                                <td>@item.IsActive</td>
+                                <td>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="isActiveCheckbox_@item.MenuId" data-id="@item.MenuId" data-isactive="@item.IsActive.ToString().ToLower()" checked="@item.IsActive" />
+
+                                        <label class="custom-control-label" for="isActiveCheckbox_@item.MenuId">
+
+                                        </label>
+                                    </div>
+                                </td>
                                 <td>@item.ControllerName</td>
                                 <td>@item.Levels</td>
                                 <td>@item.ParentId</td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.MenuId" class="btn btn-gradient-success btn-sm">Sửa</a> |
                                     <a asp-action="Details" asp-route-id="@item.MenuId" class="btn btn-gradient-dark btn-sm">Chi tiết</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.MenuId" class="btn btn-gradient-danger btn-sm">Xóa</a>
+                                    <a data-id="@item.MenuId" class="btn btn-gradient-danger btn-sm btn-delete">Delete</a>
                                 </td>
                             </tr>
                         }
@@ -57,3 +65,57 @@
     </div>
 
 </div>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+    <!-- Thêm toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".custom-control-input").change(function () {
+                var _id = $(this).data("id");
+                var isChecked = $(this).prop("checked");
+
+
+                $.ajax({
+                    url: "/admin/menus/ToggleIsActive",
+                    type: "POST",
+                    data: { id: _id, isActive: isChecked },
+                    success: function (result) {
+                        if (result) {
+                            // Cập nhật giao diện người dùng
+                            $(".custom-control-input[data-id='" + _id + "']").data("isactive", isChecked);
+                            toastr.success('Đã cập nhật trạng thái');
+                        } else {
+                            toastr.error('Cập nhật không thành công');
+                        }
+                    }
+                });
+            });
+        });
+        $(document).ready(function () {
+            $(".btn-delete").click(function () {
+                _id = $(this).data("id");
+                if (confirm("Bạn có muốn xóa không")) {
+                    $.ajax({
+                        url: "/admin/menus/deletemenu",
+                        type: "POST",
+                        data: { id: _id },
+                        success: function (result) {
+                            if (result) {
+                                $("#tr_" + _id).remove();
+                                toastr.success('Xóa thành công');
+                            }
+                            else {
+                                toastr.error('Xóa không thành công');
+                            }
+                        }
+                    })
+                }
+
+            });
+        })
+    </script>
+
+}

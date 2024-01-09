@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NHOM9WEB.Models;
-using X.PagedList;
 
 namespace NHOM9WEB.Areas.Admin.Controllers
 {
@@ -17,11 +16,10 @@ namespace NHOM9WEB.Areas.Admin.Controllers
         }
 
         // GET: Admin/BlogComments
-        public async Task<IActionResult> Index(int? page)
+        public async Task<IActionResult> Index()
         {
-            if (page == null) page = 1;
-            int pageSize = 3;
-            var dBNOITHATContext = _context.TbBlogComments.Include(t => t.Blog).ToPagedList((int)page, pageSize);
+
+            var dBNOITHATContext = _context.TbBlogComments.Include(t => t.Blog).ToList();
             return View(dBNOITHATContext);
         }
 
@@ -143,7 +141,47 @@ namespace NHOM9WEB.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        [HttpPost]
+        public IActionResult ToggleIsActive(int id)
+        {
+            var cmt = _context.TbBlogComments.Find(id);
 
+            if (cmt != null) {
+                // Chuyển đổi trạng thái
+                cmt.IsActive = !cmt.IsActive;
+                _context.SaveChanges();
+
+
+                return Json(true);
+            }
+
+
+            return Json(false);
+        }
+        [HttpPost]
+        public IActionResult DeleteCmt(int id)
+        {
+            try {
+                // Tìm menu theo ID
+                var cmt = _context.TbBlogComments.Find(id);
+
+                if (cmt == null) {
+                    // Trả về kết quả là false nếu menu không tồn tại
+                    return Json(false);
+                }
+
+                // Thực hiện xóa menu
+                _context.TbBlogComments.Remove(cmt);
+                _context.SaveChanges();
+
+                // Trả về kết quả là true để thể hiện rằng xóa thành công
+                return Json(true);
+            }
+            catch (Exception ex) {
+                // Xử lý lỗi nếu có
+                return Json(false);
+            }
+        }
         private bool TbBlogCommentExists(int id)
         {
             return (_context.TbBlogComments?.Any(e => e.CommentId == id)).GetValueOrDefault();

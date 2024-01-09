@@ -44,20 +44,23 @@
                 </div>
                 @foreach (var item in blogComment) {
 
-                    <div class="blog-author">
-                        <div class="media align-items-center">
-                            <img src="img/blog/author.png" alt="">
-                            <div class="media-body">
-                                <a href="#">
-                                    <h4>@item.Name</h4>
-                                </a>
-                                <p>
-                                    @item.Detail
-                                </p>
+                    @if (item.IsActive==true) {
+                        <div class="blog-author">
+                            <div class="media align-items-center">
+                                <img src="img/blog/author.png" alt="">
+                                <div class="media-body">
+                                    <a href="#">
+                                        <h4>@item.Name</h4>
+                                    </a>
+                                    <p>
+                                        @item.Detail
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }                <div class="comments-area">
+                    }
+                }
+                <div class="comments-area">
                 </div>
                 <div class="comment-form">
                     <h4>Leave a Reply</h4>

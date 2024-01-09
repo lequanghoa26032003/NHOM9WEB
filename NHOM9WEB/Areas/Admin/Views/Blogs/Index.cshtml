@@ -78,10 +78,10 @@
         </a>
     </div>
     @foreach (var item in Model) {
-        <div style="background-color: #E2E3E5;" class="container mt-4 mb-4">
-            <div class="card post-card">
+        <div style="background-color: #E2E3E5;" class="container mt-4 mb-4" >
+            <div class="card post-card" >
 
-                <div  class="card-body">
+                <div class="card-body" id="tr_@item.BlogId">
 
                     <h4 class="card-title">@item.Title</h4>
                     <div class="d-flex">
@@ -108,24 +108,27 @@
                             <i class="mdi mdi-heart-outline text-muted like-icon"></i>
                         </div>
                     </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="isActiveCheckbox_@item.BlogId" data-id="@item.BlogId" data-isactive="@item.IsActive.ToString().ToLower()" checked="@item.IsActive" />
 
+                        <label class="custom-control-label" for="isActiveCheckbox_@item.BlogId">
+
+                        </label>
+                    </div>
                     <div style=" margin: 20px 0;">
-                        
+
                         <a asp-action="Edit" asp-route-id="@item.BlogId">
                             <button type="button" class="btn btn-outline-success">
                                 Sửa
                             </button>
-                        </a> 
-                        <a asp-action="Details" asp-route-id="@item.BlogId" >
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.BlogId">
                             <button type="button" class="btn btn-outline-dark">
                                 Chi tiết
                             </button>
-                        </a> 
-                        <a asp-action="Delete" asp-route-id="@item.BlogId" >
-                            <button type="button" class="btn btn-outline-danger">
-                                Xóa
-                            </button>
                         </a>
+                        <a data-id="@item.BlogId" class="btn btn-outline-danger btn-delete">Delete</a>
+
                     </div>
                 </div>
             </div>
@@ -165,3 +168,57 @@
     </div>
 </div>
 
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+    <!-- Thêm toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".custom-control-input").change(function () {
+                var _id = $(this).data("id");
+                var isChecked = $(this).prop("checked");
+
+
+                $.ajax({
+                    url: "/admin/blogs/ToggleIsActive",
+                    type: "POST",
+                    data: { id: _id, isActive: isChecked },
+                    success: function (result) {
+                        if (result) {
+                            // Cập nhật giao diện người dùng
+                            $(".custom-control-input[data-id='" + _id + "']").data("isactive", isChecked);
+                            toastr.success('Đã cập nhật trạng thái');
+                        } else {
+                            toastr.error('Cập nhật không thành công');
+                        }
+                    }
+                });
+            });
+        });
+        $(document).ready(function () {
+            $(".btn-delete").click(function () {
+                _id = $(this).data("id");
+                if (confirm("Bạn có muốn xóa không")) {
+                    $.ajax({
+                        url: "/admin/Blogs/DeleteBlog",
+                        type: "POST",
+                        data: { id: _id },
+                        success: function (result) {
+                            if (result) {
+                                $("#tr_" + _id).remove();
+                                toastr.success('Xóa thành công');
+                            }
+                            else {
+                                toastr.error('Xóa không thành công');
+                            }
+                        }
+                    })
+                }
+
+            });
+        })
+    </script>
+
+}
