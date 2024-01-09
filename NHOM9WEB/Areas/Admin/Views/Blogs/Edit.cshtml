@@ -44,9 +44,15 @@
             </div>
 
 
-        <div class="form-group">
-            <label asp-for="Image" class="control-label">Image</label>
-            <input asp-for="Image" class="form-control" />
+        <div class="form-group mb-3">
+            <label asp-for="Image" class="control-label"></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-success m-1 form-label" onclick="openDialog()">Chọn hình ảnh</button>
+                </div>
+                <!-- /btn-group -->
+                <input type="text" class="form-control " id="file_input" asp-for="Image" aria-describedby="button-addon2">
+            </div>
             <span asp-validation-for="Image" class="text-danger"></span>
         </div>
 
@@ -120,12 +126,13 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
+@*@section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+}*@
 @{
-    var summerNote = new NHOM9WEB.Areas.Admin.Models.SummerNote("#Detail");
-    <partial name="_SummerNote" model="summerNote" />
+    var summernote = new NHOM9WEB.Areas.Admin.Models.SummerNote("#Detail");
+
 }
+<partial name="_Summernote" model="summernote" />

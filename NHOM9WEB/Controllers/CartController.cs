@@ -161,6 +161,10 @@ namespace NHOM9WEB.Controllers
                 }
                 else {
                     int totalAmount = 0;
+                    foreach (var item in cart) {
+                        totalAmount = (int)cart.Sum(x => x.Quantity*x.Price);
+
+                    }
 
                     var order = new TbOrder();
                     order.CustomerName = name;
@@ -175,8 +179,8 @@ namespace NHOM9WEB.Controllers
                     foreach (var item in cart) {
                         var orderDetail = new TbOrderDetail();
                         orderDetail.OrderId = orderId;
-                        orderDetail.ProductId=item.product.ProductId;
-                        orderDetail.Price = item.product.Price;
+                        orderDetail.ProductId=item.ProductId;
+                        orderDetail.Price = item.Price;
                         orderDetail.Quantity = item.Quantity;
                         _context.TbOrderDetails.Add(orderDetail);
                         _context.SaveChanges();
@@ -191,17 +195,16 @@ namespace NHOM9WEB.Controllers
             }
         }
 
-        public const string CARTKEY = "cart";
+        public const string CARTKEY = "Cart";
 
         List<CartItem> GetCartItems()
         {
-            List<CartItem> cartItems = HttpContext.Session.GetJson<List<CartItem>>("Cart")??new List<CartItem>();
-            CartItemViewModel cartVM = new()
-            {
-                CartItems=cartItems,
-                GrandTotal=cartItems.Sum(x => x.Quantity*x.Price)
-            };
-            return cartItems;
+            var session = HttpContext.Session;
+            string jsoncart = session.GetString(CARTKEY);
+            if (jsoncart != null) {
+                return JsonConvert.DeserializeObject<List<CartItem>>(jsoncart);
+            }
+            return new List<CartItem>();
         }
         void ClearCart()
         {

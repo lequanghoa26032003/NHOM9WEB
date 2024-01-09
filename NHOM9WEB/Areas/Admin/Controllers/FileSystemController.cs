@@ -2,15 +2,16 @@
 using elFinder.NetCore.Drivers.FileSystem;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace NHOM9WEB.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("/Admin/el-finder-file-system")]
+    // [Authorize] - bỏ comment user phải đăng nhập mới dùng được
+    [Route("Admin/el-finder-file-system")]
     public class FileSystemController : Controller
     {
-        IWebHostEnvironment _env;
+
+        readonly IWebHostEnvironment _env;
         public FileSystemController(IWebHostEnvironment env) => _env = env;
 
         // Url để client-side kết nối đến backend
@@ -19,14 +20,7 @@ namespace NHOM9WEB.Areas.Admin.Controllers
         public async Task<IActionResult> Connector()
         {
             var connector = GetConnector();
-            var result = await connector.ProcessAsync(Request);
-            if (result is JsonResult) {
-                var json = result as JsonResult;
-                return Content(JsonSerializer.Serialize(json.Value), json.ContentType);
-            }
-            else {
-                return Json(result);
-            }
+            return await connector.ProcessAsync(Request);
         }
 
         // Địa chỉ để truy vấn thumbnail
@@ -61,9 +55,9 @@ namespace NHOM9WEB.Areas.Admin.Controllers
                 //IsReadOnly = !User.IsInRole("Administrators")
                 IsReadOnly = false, // Can be readonly according to user's membership permission
                 IsLocked = false, // If locked, files and directories cannot be deleted, renamed or moved
-                Alias = "Files", // Beautiful name given to the root/home folder
-                //MaxUploadSizeInKb = 2048, // Limit imposed to user uploaded file <= 2048 KB
-                //LockedFolders = new List<string>(new string[] { "Folder1" }
+                Alias = "Thư mục ứng dụng", // Beautiful name given to the root/home folder
+                                            //MaxUploadSizeInKb = 2048, // Limit imposed to user uploaded file <= 2048 KB
+                                            //LockedFolders = new List<string>(new string[] { "Folder1" }
                 ThumbnailSize = 100,
             };
 
@@ -76,5 +70,6 @@ namespace NHOM9WEB.Areas.Admin.Controllers
                 MimeDetect = MimeDetectOption.Internal
             };
         }
+
     }
 }

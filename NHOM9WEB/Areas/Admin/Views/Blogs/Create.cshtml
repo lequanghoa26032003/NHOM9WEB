@@ -4,6 +4,14 @@
     ViewData["Title"] = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<!-- Đưa vào thư viện Bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- Đưa vào thư viện jQuery (nếu cần) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<!-- Đưa vào thư viện Popper.js (nếu cần) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- Đưa vào thư viện Bootstrap JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
 <div class="card-body">
@@ -35,13 +43,17 @@
             <div class="form-group">
 
                 <label asp-for="Detail" class="control-label">Detail</label>
-                <textarea asp-for="Detail" class="form-control" rows="7" placeholder="Enter Detail"></textarea>
-                <span asp-validation-for="Detail" class="text-danger"></span>
+                <textarea asp-for="Detail" id="Detail" class="form-control"></textarea>
             </div>
-
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn btn-success m-1 form-label" onclick="openDialog()">Chọn hình ảnh</button>
+                    </div>
+                    <!-- /btn-group -->
+                    <input type="text" class="form-control " id="file_input" asp-for="Image" aria-describedby="button-addon2">
+                </div>
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -98,10 +110,12 @@
     </div>
 </div>
 
-@section Scripts {
+@*@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+*@
+
 @{
-    var summerNote = new NHOM9WEB.Areas.Admin.Models.SummerNote("#Detail");
-    <partial name="_SummerNote" model="summerNote" />
+    var summernote = new NHOM9WEB.Areas.Admin.Models.SummerNote("#Detail");
 }
+<partial name="_SummerNote" model="summernote" />

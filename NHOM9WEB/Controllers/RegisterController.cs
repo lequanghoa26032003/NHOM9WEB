@@ -5,11 +5,11 @@ using NHOM9WEB.Utilities;
 
 namespace NHOM9WEB.Controllers
 {
-    public class RegisterController : Controller
+    public class RegisterAdminController : Controller
     {
         private readonly DBNOITHATContext _context;
 
-        public RegisterController(DBNOITHATContext context)
+        public RegisterAdminController(DBNOITHATContext context)
         {
             _context = context;
         }

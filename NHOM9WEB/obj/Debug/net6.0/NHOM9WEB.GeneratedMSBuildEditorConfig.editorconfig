@@ -16,6 +16,26 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\hoacon\OneDrive\Desktop\NHOM9WEB\NHOM9WEB
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Areas/Admin/Views/BlogComments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQmxvZ0NvbW1lbnRzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Areas/Admin/Views/BlogComments/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQmxvZ0NvbW1lbnRzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Areas/Admin/Views/BlogComments/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQmxvZ0NvbW1lbnRzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Areas/Admin/Views/BlogComments/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQmxvZ0NvbW1lbnRzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Areas/Admin/Views/BlogComments/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQmxvZ0NvbW1lbnRzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/hoacon/OneDrive/Desktop/NHOM9WEB/NHOM9WEB/Areas/Admin/Views/Blogs/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQmxvZ3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
