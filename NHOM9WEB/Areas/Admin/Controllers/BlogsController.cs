@@ -137,19 +137,15 @@ namespace NHOM9WEB.Areas.Admin.Controllers
         public IActionResult DeleteBlog(int id)
         {
             try {
-                // Tìm menu theo ID
                 var blog = _context.TbBlogs.Find(id);
 
                 if (blog == null) {
-                    // Trả về kết quả là false nếu menu không tồn tại
                     return Json(false);
                 }
 
-                // Thực hiện xóa menu
                 _context.TbBlogs.Remove(blog);
                 _context.SaveChanges();
 
-                // Trả về kết quả là true để thể hiện rằng xóa thành công
                 return Json(true);
             }
             catch (Exception ex) {

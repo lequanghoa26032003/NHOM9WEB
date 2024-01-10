@@ -153,7 +153,49 @@ namespace NHOM9WEB.Areas.Admin.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult ToggleIsActive(int id)
+        {
+            var sp = _context.TbProducts.Find(id);
 
+            if (sp != null) {
+                // Chuyển đổi trạng thái
+                sp.IsActive = !sp.IsActive;
+
+
+                _context.SaveChanges();
+
+
+                return Json(true);
+            }
+
+
+            return Json(false);
+        }
+        [HttpPost]
+        public IActionResult Deletesp(int id)
+        {
+            try {
+                // Tìm menu theo ID
+                var sp = _context.TbProducts.Find(id);
+
+                if (sp == null) {
+                    // Trả về kết quả là false nếu menu không tồn tại
+                    return Json(false);
+                }
+
+                // Thực hiện xóa menu
+                _context.TbProducts.Remove(sp);
+                _context.SaveChanges();
+
+                // Trả về kết quả là true để thể hiện rằng xóa thành công
+                return Json(true);
+            }
+            catch (Exception ex) {
+                // Xử lý lỗi nếu có
+                return Json(false);
+            }
+        }
         private bool TbProductExists(int id)
         {
             return (_context.TbProducts?.Any(e => e.ProductId == id)).GetValueOrDefault();

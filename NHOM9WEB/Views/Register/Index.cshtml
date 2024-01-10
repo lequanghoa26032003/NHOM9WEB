@@ -15,6 +15,11 @@
         <form asp-action="Register" class="row contact_form" method="post" novalidate="novalidate">
             <div asp-validation-summary="ModelOnly" class="text-danger col-md-8"></div>
             <div class="col-md-8 form-group p_star">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" placeholder="FullName" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="col-md-8 form-group p_star">
                 <label asp-for="Username" class="control-label"></label>
                 <input asp-for="Username" class="form-control" placeholder="Username" />
                 <span asp-validation-for="Username" class="text-danger"></span>

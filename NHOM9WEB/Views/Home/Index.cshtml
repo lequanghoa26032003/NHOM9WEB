@@ -3,32 +3,33 @@
 @using X.PagedList;
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Web.Common;
+
 <section class="feature_part padding_top">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="section_tittle text-center">
-                    <h2>Featured Category</h2>
+                    <h2>
+                        Danh Mục Nổi Bật
+                    </h2>
                 </div>
             </div>
         </div>
         <div class="row align-items-center justify-content-between">
-            @foreach (var item in Model) {
-                @if (item.IsNew == false)
-                {
-                    string url = Functions.TitleSlugGeneration("review", item.Title, item.ProductId);
-                    <div class="col-lg-7 col-sm-6">
-                        <div class="single_feature_post_text">
-                            <p>Hàng mới tuyển</p>
-                            <h3>@item.Title</h3>
-                            <a href="/@url" class="feature_btn">Xem thêm <i class="fas fa-play"></i></a>
-                            <img src="@item.Image" alt="">
-                        </div>
-                    </div>
-                }
-            }
+            @foreach (var item in ViewBag.newlist) {
+                string url = Functions.TitleSlugGeneration("review", item.Title, item.ProductId);
 
+                <div class="col-lg-5 col-sm-6">
+                    <div class="single_feature_post_text">
+                        <p>Hàng mới tuyển</p>
+                        <h3>@item.Title</h3>
+                        <a href="/@url" class="feature_btn">Xem thêm <i class="fas fa-play"></i></a>
+                        <img src="@item.Image" alt="">
+                    </div>
+                </div>
+            }
         </div>
+
     </div>
 </section>
 <section class="product_list section_padding">
@@ -36,7 +37,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="section_tittle text-center">
-                    <h2>awesome <span>shop</span></h2>
+                    <h2>Hàng đẹp <span>cửa hàng</span></h2>
                 </div>
             </div>
         </div>
@@ -53,7 +54,14 @@
 
                                             <div class="col-lg-3 col-sm-6">
                                                 <div class="single_product_item">
-                                                    <img src="@item.Image" alt="">
+                                                    @if (item.Alias=="ghe-sofa") {
+                                                        <img src="@item.Image" alt="">
+
+                                                    }
+                                                    else {
+                                                        <img style="width:210px; height:230px;" src="@item.Image" alt="">
+
+                                                    }
                                                     <div class="single_product_text">
                                                         <a href="/@url">
                                                             <h4>@item.Title</h4>
@@ -146,7 +154,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="section_tittle text-center">
-                    <h2>Best Sellers <span>shop</span></h2>
+                    <h2>Hàng giảm giá <span>cửa hàng</span></h2>
                 </div>
             </div>
         </div>
@@ -156,13 +164,21 @@
                     <div class="owl-stage-outer">
                         <div class="owl-stage" style="transform: translate3d(-1200px, 0px, 0px); transition: all 0.25s ease 0s; width: 3120px;">
                             @foreach(var item in Model) {
+                                string url = Functions.TitleSlugGeneration("review", item.Title, item.ProductId);
+
                                 if (item.IsBestSeller==true) {
                                     <div class="owl-item cloned" style="width: 210px; margin-right: 30px;">
                                         <div class="single_product_item">
                                             <img src="@item.Image" alt="">
                                             <div class="single_product_text">
-                                                <h4>@item.Title</h4>
-                                                <h3>@item.PriceSale</h3>
+                                                <a href="/@url">
+                                                    <h4>@item.Title</h4>
+
+                                                </a>
+                                                <div>
+                                                <h3>@Functions.ToVnd((double)item.PriceSale)</h3>
+                                                <p style="text-decoration: line-through; color: grey;">@Functions.ToVnd((double)item.Price)</p>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>

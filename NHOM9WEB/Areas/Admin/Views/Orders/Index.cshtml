@@ -1,0 +1,88 @@
+﻿@model IEnumerable<NHOM9WEB.Models.TbOrderManagement>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div style="background-color: #E2E3E5;" class="card-body">
+                <h4 class="card-title">Danh sách danh đơn hàng</h4>
+
+                <table class="table table-secondary">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên người đặt hàng</th>
+                            <th>SDT</th>
+                            <th>Địa chỉ</th>
+                            <th>Tổng tiền</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giá từng sản phẩm</th>
+                            <th>Ngày tạo đơn hàng</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var i = 1;
+                        }
+                        @foreach (var item in Model) {
+                            <tr class="table-secondary " id="tr_@item.OrderId">
+                                <td>@(i++)</td>
+                                <td>@item.CustomerName</td>
+                                <td>@item.Phone
+                                </td>
+                                <td>@item.Address</td>
+                                <td>@item.TotalAmount</td>
+                                <td>@item.Title</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Price</td>
+                                <td>@item.CreatedDate</td>
+
+                                <td>
+                                    <a data-id="@item.OrderId" class="btn btn-gradient-danger btn-sm btn-delete">Xóa</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+    <!-- Thêm toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".btn-delete").click(function () {
+                _id = $(this).data("id");
+                if (confirm("Bạn có muốn xóa không")) {
+                    $.ajax({
+                        url: "/admin/Orders/DeleteOrder",
+                        type: "POST",
+                        data: { id: _id },
+                        success: function (result) {
+                            if (result) {
+                                $("#tr_" + _id).remove();
+                                toastr.success('Xóa thành công');
+                            }
+                            else {
+                                toastr.error('Xóa không thành công');
+                            }
+                        }
+                    })
+                }
+
+            });
+        })
+    </script>
+
+}

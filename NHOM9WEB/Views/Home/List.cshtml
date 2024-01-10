@@ -3,7 +3,11 @@
 @using X.PagedList;
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Web.Common;
-
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<TbBlogComment> blogComment = ViewBag.blogComment;
+}
 <!--================Blog Area =================-->
 <section class="blog_area padding_top">
     <div class="container">
@@ -31,6 +35,9 @@
                                 <ul class="blog-info-link">
                                     <li><a href="#"><i class="far fa-user"></i> @item.CreatedBy</a></li>
                                     <li><a href="#"><i class="far fa-comments"></i>@item.CreatedDate</a></li>
+                                    <li>
+                                    </li>
+
                                 </ul>
                             </div>
                         </article>
@@ -83,49 +90,6 @@
                             </div>
                             <button class="button rounded-0 primary-bg text-white w-100 btn_1" type="submit">Search</button>
                         </form>
-                    </aside>
-
-
-                    <aside class="single_sidebar_widget post_category_widget">
-                        <h4 class="widget_title">Category</h4>
-                        <ul class="list cat-list">
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>Resaurant food</p>
-                                    <p>(37)</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>Travel news</p>
-                                    <p>(10)</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>Modern technology</p>
-                                    <p>(03)</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>Product</p>
-                                    <p>(11)</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>Inspiration</p>
-                                    <p>21</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex">
-                                    <p>Health Care (21)</p>
-                                    <p>09</p>
-                                </a>
-                            </li>
-                        </ul>
                     </aside>
 
                     <aside class="single_sidebar_widget popular_post_widget">
@@ -209,7 +173,7 @@
                                        onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
                             </div>
                             <button class="button rounded-0 primary-bg text-white w-100 btn_1"
-                                    type="submit">
+                                    type="submit">  
                                 Subscribe
                             </button>
                         </form>

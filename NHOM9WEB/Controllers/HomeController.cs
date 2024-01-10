@@ -22,7 +22,8 @@ namespace NHOM9WEB.Controllers
             if (page == null) page = 1;
             int pageSize = 8;
             var list = _context.TbProducts.ToPagedList((int)page, pageSize);
-
+            var list2 = _context.TbProducts.Where((l => l.IsNew==true)).ToList();
+            ViewBag.newlist=list2;
             return View(list);
         }
         public IActionResult Logout()
@@ -55,6 +56,9 @@ namespace NHOM9WEB.Controllers
                 return NotFound();
             }
             var list = _context.TbProducts.ToPagedList((int)page, pageSize);
+            int totalItemCount = _context.TbProducts.Count();
+            ViewBag.TotalItemCount = totalItemCount;
+
             if (list==null) {
                 return NotFound();
             }

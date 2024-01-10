@@ -13,6 +13,7 @@ public partial class DBNOITHATContext : DbContext
         : base(options)
     {
     }
+
     public virtual DbSet<AdminMenu> AdminMenus { get; set; }
 
     public virtual DbSet<ShopCategory> ShopCategories { get; set; }
@@ -41,6 +42,8 @@ public partial class DBNOITHATContext : DbContext
 
     public virtual DbSet<TbOrderDetail> TbOrderDetails { get; set; }
 
+    public virtual DbSet<TbOrderManagement> TbOrderManagements { get; set; }
+
     public virtual DbSet<TbOrderStatus> TbOrderStatuses { get; set; }
 
     public virtual DbSet<TbProduct> TbProducts { get; set; }
@@ -65,7 +68,21 @@ public partial class DBNOITHATContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AdminMenu>(entity =>
+        {
+            entity.HasKey(e => e.AdminMenuId).HasName("PK__AdminMen__5DF61764B4099392");
 
+            entity.ToTable("AdminMenu");
+
+            entity.Property(e => e.AdminMenuId).HasColumnName("AdminMenuID");
+            entity.Property(e => e.ActionName).HasMaxLength(20);
+            entity.Property(e => e.AreaName).HasMaxLength(20);
+            entity.Property(e => e.ControllerName).HasMaxLength(20);
+            entity.Property(e => e.Icon).HasMaxLength(50);
+            entity.Property(e => e.IdName).HasMaxLength(50);
+            entity.Property(e => e.ItemName).HasMaxLength(50);
+            entity.Property(e => e.ItemTarget).HasMaxLength(20);
+        });
 
         modelBuilder.Entity<ShopCategory>(entity =>
         {
@@ -302,6 +319,23 @@ public partial class DBNOITHATContext : DbContext
             entity.HasOne(d => d.Order).WithMany(p => p.TbOrderDetails)
                 .HasForeignKey(d => d.OrderId)
                 .HasConstraintName("FK_tb_OrderDetail_tb_Order");
+        });
+
+        modelBuilder.Entity<TbOrderManagement>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("TbOrder_Management");
+
+            entity.Property(e => e.Address).HasMaxLength(250);
+            entity.Property(e => e.CreatedBy).HasMaxLength(150);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.CustomerName).HasMaxLength(150);
+            entity.Property(e => e.ModifiedBy).HasMaxLength(150);
+            entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+            entity.Property(e => e.Phone).HasMaxLength(15);
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.Title).HasMaxLength(250);
         });
 
         modelBuilder.Entity<TbOrderStatus>(entity =>
